@@ -1,9 +1,6 @@
 package org.example.cli;
 
-import org.example.cli.commands.AddExpenseCommand;
-import org.example.cli.commands.DeleteCommand;
-import org.example.cli.commands.ListCommand;
-import org.example.cli.commands.SummaryCommand;
+import org.example.cli.commands.*;
 import picocli.CommandLine;
 
 @CommandLine.Command(
@@ -14,7 +11,8 @@ import picocli.CommandLine;
                 AddExpenseCommand.class,
                 ListCommand.class,
                 SummaryCommand.class,
-                DeleteCommand.class
+                DeleteCommand.class,
+                UpdateCommand.class
         }
 )
 public class TrackerCLI implements Runnable {

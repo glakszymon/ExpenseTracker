@@ -6,6 +6,7 @@ import org.example.services.models.Result;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ExpenseService {
 
@@ -131,6 +132,42 @@ public class ExpenseService {
             sum += t.Amount;
         }
         return Result.success(sum, "Sum calculated correctly");
+    }
+
+    public Result<ExpenseRecord> UpdateAction(int id, String description, Integer amount)
+    {
+        if(id < 0)
+        {
+            return Result.failure("Id number must be greater then or equal to 0");
+        }
+        if(amount != null && amount < 0)
+        {
+            return Result.failure("Amount must be greater then 0");
+        }
+
+        var expenseRecordsList = Load();
+        var updatingRecord = new ExpenseRecord();
+
+        for(var t : expenseRecordsList)
+        {
+            if(t.Id == id)
+            {
+                if(description != null)
+                {
+                    t.Description = description;
+                }
+                if(amount != null)
+                {
+                    t.Amount = amount;
+                }
+
+                Save(expenseRecordsList);
+
+                return Result.success(t, "Record has been updated");
+            }
+        }
+
+        return Result.failure("Theres no expense record with this id number");
     }
 
     private List<ExpenseRecord> Load()
