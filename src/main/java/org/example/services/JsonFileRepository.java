@@ -10,10 +10,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class JsonFileRepository {
-    private final String _filePath = "src/main/resources/expenses.json";
+    private final String _filePath = createDataPath();
 
-    public void SaveFile(JSONArray array)
-    {
+    public void SaveFile(JSONArray array) {
+        try {
+            Files.createDirectories(Path.of(_filePath).getParent());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
         try (FileWriter file = new FileWriter(_filePath)) {
             file.write(array.toJSONString());
             file.flush();
@@ -43,6 +48,20 @@ public class JsonFileRepository {
         }
 
         return null;
+    }
+
+    private static String createDataPath() {
+        try {
+            Path jarDir = Path.of(JsonFileRepository.class
+                            .getProtectionDomain()
+                            .getCodeSource()
+                            .getLocation()
+                            .toURI())
+                    .getParent();
+            return jarDir.resolve("expenses.json").toString();
+        } catch (Exception e) {
+            return Path.of("expenses.json").toString();
+        }
     }
 
 }

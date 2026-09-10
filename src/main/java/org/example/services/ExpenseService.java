@@ -12,6 +12,7 @@ public class ExpenseService {
 
     public Result<ExpenseRecord> AddAction(String description, int amount)
     {
+// TODO:       Gdy nie ma pliku wtedy sie wywala
         if(amount <= 0)
         {
             return Result.failure("You're amount can't be added");
