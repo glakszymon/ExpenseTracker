@@ -2,7 +2,6 @@ package org.example.services;
 
 import com.github.freva.asciitable.AsciiTable;
 import com.github.freva.asciitable.Column;
-import com.github.freva.asciitable.HorizontalAlign;
 import org.example.services.models.ExpenseRecord;
 
 import java.time.format.DateTimeFormatter;
@@ -24,7 +23,7 @@ public class ConsolePrinter {
     {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
-        String table = AsciiTable.getTable(AsciiTable.BASIC_ASCII_NO_DATA_SEPARATORS, data, Arrays.asList(
+        return AsciiTable.getTable(AsciiTable.BASIC_ASCII_NO_DATA_SEPARATORS, data, Arrays.asList(
                 new Column()
                         .header("ID")
                         .headerAlign(CENTER)
@@ -47,8 +46,5 @@ public class ConsolePrinter {
                         .with(e -> e.ExpenseDateTime.format(formatter))
         ));
 
-        return table;
     }
 }
-
-//TODO:Dynamicznie rysować tabele

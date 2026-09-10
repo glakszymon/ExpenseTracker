@@ -2,17 +2,14 @@ package org.example.services;
 
 import org.example.services.models.ExpenseRecord;
 import org.example.services.models.Result;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ExpenseService {
 
     public Result<ExpenseRecord> AddAction(String description, int amount)
     {
-// TODO:       Gdy nie ma pliku wtedy sie wywala
         if(amount <= 0)
         {
             return Result.failure("You're amount can't be added");

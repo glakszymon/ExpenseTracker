@@ -7,6 +7,4 @@ public class ExpenseRecord {
     public int Amount;
     public String Description;
     public LocalDateTime ExpenseDateTime;
-
-//    TODO: Zablokuj zmienne i ustaw je za pomoca funkcji i konstruktorow
 }
