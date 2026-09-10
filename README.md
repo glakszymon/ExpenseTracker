@@ -45,7 +45,6 @@ When passing arguments, wrap a multi-word description in quotes.
 ## Available commands (`--help` output)
 
 ```
-Usage: expenses [-hV] [COMMAND]
 Menedżer wydatków CLI
   -h, --help      Show this help message and exit.
   -V, --version   Print version information and exit.
@@ -60,8 +59,8 @@ Commands:
 Example invocation:
 
 ```bash
-expenses add --amount 50 --description "shopping"
-expenses list
+ add --amount 50 --description "shopping"
+ list
 ```
 
 ---
@@ -69,7 +68,7 @@ expenses list
 ## `add` — add a new expense
 
 ```
-Usage: expenses add -a=<amount> -d=<description>
+Usage:  add -a=<amount> -d=<description>
 Add a new expense
   -a, --amount=<amount>   Expense amount
   -d, --description=<description>
@@ -79,8 +78,8 @@ Add a new expense
 Both parameters are required.
 
 ```bash
-expenses add -a 100 -d "lunch"
-expenses add --amount 25.50 --description "ticket"
+ add -a 100 -d "lunch"
+ add --amount 25.50 --description "ticket"
 ```
 
 ---
@@ -88,7 +87,7 @@ expenses add --amount 25.50 --description "ticket"
 ## `list` — display the list of expenses
 
 ```
-Usage: expenses list [-m=<monthNumber>]
+Usage:  list [-m=<monthNumber>]
 Display the list of all expenses
   -m, --month=<monthNumber>
          Month number (1-12) to list expenses for
@@ -97,9 +96,9 @@ Display the list of all expenses
 The `-m/--month` parameter is optional. Without it, all expenses are shown; with it, only expenses from the given month (1–12) are shown.
 
 ```bash
-expenses list
-expenses list -m 3
-expenses list --month 12
+ list
+ list -m 3
+ list --month 12
 ```
 
 ---
@@ -107,7 +106,7 @@ expenses list --month 12
 ## `summary` — total sum of expenses
 
 ```
-Usage: expenses summary [-m=<monthNumber>]
+Usage:  summary [-m=<monthNumber>]
 Display the total sum of expenses
   -m, --month=<monthNumber>
          Month number (1-12) to calculate expenses for
@@ -116,9 +115,9 @@ Display the total sum of expenses
 The `-m/--month` parameter is optional. Without it, the sum of all expenses is calculated; with it, the sum for the given month (1–12).
 
 ```bash
-expenses summary
-expenses summary -m 6
-expenses summary --month 1
+ summary
+ summary -m 6
+ summary --month 1
 ```
 
 ---
@@ -126,7 +125,7 @@ expenses summary --month 1
 ## `delete` — delete an expense
 
 ```
-Usage: expenses delete --id=<id>
+Usage:  delete --id=<id>
 Delete an expense by its ID
       --id=<id>   ID of the expense to delete
 ```
@@ -134,7 +133,7 @@ Delete an expense by its ID
 The `--id` parameter is required.
 
 ```bash
-expenses delete --id 5
+ delete --id 5
 ```
 
 ---
@@ -142,7 +141,7 @@ expenses delete --id 5
 ## `update` — update an expense
 
 ```
-Usage: expenses update [-a=<amount>] [-d=<description>] --id=<id>
+Usage:  update [-a=<amount>] [-d=<description>] --id=<id>
 Update existing expense
   -a, --amount=<amount>   Expense amount
   -d, --description=<description>
@@ -153,9 +152,9 @@ Update existing expense
 The `--id` parameter is required; `-a/--amount` and `-d/--description` are optional (you can update the amount, description, or both).
 
 ```bash
-expenses update --id 5 -a 120
-expenses update --id 5 -d "new description"
-expenses update --id 5 -a 90 -d "taxi"
+ update --id 5 -a 120
+ update --id 5 -d "new description"
+ update --id 5 -a 90 -d "taxi"
 ```
 
 
