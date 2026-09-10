@@ -46,4 +46,6 @@ public class DataConverter {
 
         return result;
     }
+
+//    TODO: Dodaj do pliku JSON pola {ID, ...}
 }

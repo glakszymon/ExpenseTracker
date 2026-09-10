@@ -1,8 +1,8 @@
 package org.example;
 
+import org.example.cli.TrackerCLI;
 import org.example.service.models.ExpenseRecord;
 import org.example.service.DataConverter;
-import org.example.service.GreeterApp;
 import org.example.service.JsonFileRepository;
 import picocli.CommandLine;
 
@@ -11,9 +11,8 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        int exitCode = new CommandLine(new GreeterApp()).execute(args);
-
-        // Zwracamy kod wyjścia do systemu operacyjnego (0 = sukces, >0 = błąd)
+        int exitCode = new CommandLine(new TrackerCLI()).execute(args);
+        System.exit(exitCode);
 
 //        -----------------------------------------
         var jsonFileRepository = new JsonFileRepository();
@@ -40,7 +39,6 @@ public class Main {
         var e = dataConverter.DataToJSONArray(temp);
         jsonFileRepository.SaveFile(e);
 
-        System.exit(exitCode);
     }
 }
 
