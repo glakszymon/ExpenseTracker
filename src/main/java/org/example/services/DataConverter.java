@@ -1,6 +1,6 @@
-package org.example.service;
+package org.example.services;
 
-import org.example.service.models.ExpenseRecord;
+import org.example.services.models.ExpenseRecord;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -16,6 +16,7 @@ public class DataConverter {
         for(ExpenseRecord rec : data)
         {
             JSONObject obj = new JSONObject();
+            obj.put("id", rec.Id);
             obj.put("amount", rec.Amount);
             obj.put("description", rec.Description);
             obj.put("expenseDateTime", rec.ExpenseDateTime.toString());
@@ -34,9 +35,11 @@ public class DataConverter {
         {
             JSONObject rec = (JSONObject) record;
             Long tempAmount = (Long) rec.get("amount");
+            Long tempID = (Long) rec.get("id");
             String tempDateTime = (String) rec.get("expenseDateTime");
 
             var temp = new ExpenseRecord();
+            temp.Id = tempID.intValue();
             temp.Amount = tempAmount.intValue();
             temp.Description = (String) rec.get("description");
             temp.ExpenseDateTime = LocalDateTime.parse(tempDateTime);

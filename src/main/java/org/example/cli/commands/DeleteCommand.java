@@ -1,5 +1,6 @@
 package org.example.cli.commands;
 
+import org.example.services.ExpenseService;
 import picocli.CommandLine;
 
 @CommandLine.Command(name = "delete", description = "Delete an expense by its ID")
@@ -9,7 +10,14 @@ public class DeleteCommand implements Runnable {
 
     @Override
     public void run() {
-        // TODO: dodaj tutaj logikę usuwania elementów
-        System.out.println("Użyto komendy na USUWANIE elementu");
+        var expenseService = new ExpenseService();
+        var result = expenseService.DeleteAction(id);
+        if(result.success())
+        {
+            System.out.println("Expense deleted successfully (ID: " + id + ")");
+        }else
+        {
+            System.out.println("Expense deleting failed:" + result.message());
+        }
     }
 }
