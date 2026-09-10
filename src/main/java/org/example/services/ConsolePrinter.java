@@ -1,24 +1,53 @@
 package org.example.services;
 
+import com.github.freva.asciitable.AsciiTable;
+import com.github.freva.asciitable.Column;
+import com.github.freva.asciitable.HorizontalAlign;
 import org.example.services.models.ExpenseRecord;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
+
+import static com.github.freva.asciitable.HorizontalAlign.CENTER;
+import static com.github.freva.asciitable.HorizontalAlign.LEFT;
 
 public class ConsolePrinter {
 
-    private final String[] headers = {"ID", "Description", "Amount", "Date"};
+    public void PrintTable(List<ExpenseRecord> data) {
 
-    public void PrintTable(List<ExpenseRecord> data)
+        String table = TablePrep(data);
+        System.out.println(table);
+    }
+
+    private String TablePrep(List<ExpenseRecord> data)
     {
-        System.out.printf("%-5s %-20s %-7s %-10s%n", headers[0], headers[1], headers[2], headers[3]);
-        for (var t : data)
-        {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-            var finalDateString = t.ExpenseDateTime.format(formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
-            System.out.printf("%-5s %-20s %-7s %-10s%n", t.Id, t.Description, t.Amount, finalDateString);
-        }
+        String table = AsciiTable.getTable(AsciiTable.BASIC_ASCII_NO_DATA_SEPARATORS, data, Arrays.asList(
+                new Column()
+                        .header("ID")
+                        .headerAlign(CENTER)
+                        .dataAlign(CENTER)
+                        .with(e -> String.valueOf(e.Id)),
+                new Column()
+                        .header("Description")
+                        .headerAlign(CENTER)
+                        .dataAlign(LEFT)
+                        .with(e -> e.Description),
+                new Column()
+                        .header("Amount")
+                        .headerAlign(CENTER)
+                        .dataAlign(CENTER)
+                        .with(e -> e.Amount + ""),
+                new Column()
+                        .header("Date")
+                        .headerAlign(CENTER)
+                        .dataAlign(LEFT)
+                        .with(e -> e.ExpenseDateTime.format(formatter))
+        ));
+
+        return table;
     }
 }
 
