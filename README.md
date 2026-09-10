@@ -2,21 +2,37 @@
 
 CLI expense manager written in Java (25). The app stores expenses in the `src/main/resources/expenses.json` file.
 
-## Getting the project from GitHub
+## Getting and running the app
+
+The app can be run in two ways.
+
+### Option A: Download the JAR (recommended — no Maven needed)
+
+Requirement: **Java 25**. Download `ExpenseTracker.jar` from the latest [release](https://github.com/glakszymon/ExpenseTracker/releases), then run:
+
+```bash
+java -jar ExpenseTracker.jar --help
+```
+
+Example invocation:
+
+```bash
+java -jar ExpenseTracker.jar add -a 100 -d "lunch"
+java -jar ExpenseTracker.jar list
+```
+
+### Option B: Clone the source and build it yourself
 
 Requirements: **Java 25** and **Maven**.
 
 ```bash
 git clone https://github.com/glakszymon/ExpenseTracker.git
 cd ExpenseTracker
-mvn compile
+mvn clean package
+java -jar target/ExpenseTracker.jar --help
 ```
 
-## Running the app
-
-Dependencies and code are compiled automatically by Maven.
-
-**Via Maven (command line):**
+Alternatively, run without building a JAR:
 
 ```bash
 mvn exec:java -Dexec.mainClass="org.example.Main" -Dexec.args="--help"
