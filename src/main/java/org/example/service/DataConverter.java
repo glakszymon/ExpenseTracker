@@ -1,11 +1,10 @@
-package org.example;
+package org.example.service;
 
-import org.example.models.ExpenseRecord;
+import org.example.service.models.ExpenseRecord;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 

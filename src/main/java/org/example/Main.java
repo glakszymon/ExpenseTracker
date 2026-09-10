@@ -1,12 +1,21 @@
 package org.example;
 
-import org.example.models.ExpenseRecord;
+import org.example.service.models.ExpenseRecord;
+import org.example.service.DataConverter;
+import org.example.service.GreeterApp;
+import org.example.service.JsonFileRepository;
+import picocli.CommandLine;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
+        int exitCode = new CommandLine(new GreeterApp()).execute(args);
+
+        // Zwracamy kod wyjścia do systemu operacyjnego (0 = sukces, >0 = błąd)
+
+//        -----------------------------------------
         var jsonFileRepository = new JsonFileRepository();
         var dataConverter = new DataConverter();
 
@@ -31,6 +40,7 @@ public class Main {
         var e = dataConverter.DataToJSONArray(temp);
         jsonFileRepository.SaveFile(e);
 
+        System.exit(exitCode);
     }
 }
 
