@@ -11,6 +11,11 @@ public class ExpenseService {
 
     public Result<ExpenseRecord> AddAction(String description, int amount)
     {
+        if(amount <= 0)
+        {
+            return Result.failure("You're amount can't be added");
+        }
+
         var expenseRecordsList = Load();
 
         var record = new ExpenseRecord();
