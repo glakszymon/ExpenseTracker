@@ -1,0 +1,42 @@
+package org.example;
+
+import org.example.models.ExpenseRecord;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        var jsonFileRepository = new JsonFileRepository();
+        var dataConverter = new DataConverter();
+
+        var temp = new ArrayList<ExpenseRecord>();
+        for (int i = 1; i <= 10; i++) {
+            var t = new ExpenseRecord();
+            t.ExpenseDateTime = LocalDateTime.now();
+            t.Description = "wydatek nr." + i;
+            t.Amount = i * 100;
+
+            temp.add(t);
+        }
+
+        var e = dataConverter.DataToJSONArray(temp);
+        jsonFileRepository.SaveFile(e);
+
+        var w = jsonFileRepository.ReadFile();
+        var y = dataConverter.JSONArrayToData(w);
+
+        for(var t : y)
+        {
+            System.out.println(t.Amount + " " + t.Description + " " + t.ExpenseDateTime);
+        }
+    }
+}
+
+// TODO: musze zrobic JSON Array jako głowny element w weenątrz JSON object
